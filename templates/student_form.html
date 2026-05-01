@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+<h2>Student Registration Form</h2>
+
+<form method="post">
+{% csrf_token %}
+
+<input type="text" name="first_name" placeholder="Firstname" value="{{ student.first_name|default:'' }}">
+<input type="text" name="middle_name" placeholder="Middlename" value="{{ student.middle_name|default:'' }}">
+<input type="text" name="last_name" placeholder="Lastname" value="{{ student.last_name|default:'' }}">
+
+<select name="course">
+<option>BCA</option>
+<option>MCA</option>
+<option>BTech</option>
+<option>MBA</option>
+</select>
+
+<input type="text" name="gender" placeholder="Gender" value="{{ student.gender|default:'' }}">
+<input type="text" name="phone" placeholder="Phone" value="{{ student.phone|default:'' }}">
+<textarea name="address" placeholder="Address">{{ student.address|default:'' }}</textarea>
+
+<input type="email" name="email" placeholder="Email" value="{{ student.email|default:'' }}">
+<input type="password" name="password" placeholder="Password" value="{{ student.password|default:'' }}">
+
+<button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}

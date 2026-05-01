@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+<h2>Teacher Form</h2>
+
+<form method="post">
+{% csrf_token %}
+
+<input type="text" name="name" placeholder="Name" value="{{ teacher.name|default:'' }}">
+<input type="text" name="subject" placeholder="Subject" value="{{ teacher.subject|default:'' }}">
+<input type="email" name="email" placeholder="Email" value="{{ teacher.email|default:'' }}">
+<input type="text" name="experience" placeholder="Experience" value="{{ teacher.experience|default:'' }}">
+<input type="text" name="phone" placeholder="Phone" value="{{ teacher.phone|default:'' }}">
+<textarea name="address" placeholder="Address">{{ teacher.address|default:'' }}</textarea>
+
+<button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}
