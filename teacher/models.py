@@ -10,5 +10,5 @@ class Teacher(models.Model):
     phone=models.CharField(max_length=20)
     address=models.TextField()
 
-    def _str_(self):
+    def __str__(self):
         return self.name

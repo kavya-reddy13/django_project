@@ -22,7 +22,7 @@ TEMPLATES_DIR=BASE_DIR/'templates'
 SECRET_KEY = 'django-insecure--zmkbsz!ym&rfu--r$mo3b9@22mc15%hfrgtf#)m8e*+rn9p9i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ ADD THIS
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,32 +81,14 @@ WSGI_APPLICATION = 'college.wsgi.application'
 #     }
 # }
 
-import os 
-if os.environ.get("RENDER"): 
-    # Production (Render + Railway MySQL) 
-    DATABASES = { 
-        "default": { 
-            "ENGINE": "django.db.backends.mysql", 
-            "NAME": os.environ.get("MYSQLDATABASE"), 
-            "USER": os.environ.get("MYSQLUSER"), 
-            "PASSWORD": os.environ.get("MYSQLPASSWORD"), 
-            "HOST": os.environ.get("MYSQLHOST"), 
-            "PORT": os.environ.get("MYSQLPORT", "3306"), 
-        } 
-    } 
- 
-else: 
-    # Local development 
-    DATABASES = { 
-        "default": { 
-            "ENGINE": "django.db.backends.mysql", 
-            "NAME": "main_project", 
-            "USER": "root", 
-            "PASSWORD": "Kimtaehyung@30", 
-            "HOST": "localhost", 
-            "PORT": "3306", 
-        } 
-    }
+import os
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL", "sqlite:///db.sqlite3")
+    )
+}
 
 
 # Password validation
@@ -147,3 +130,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ADD THIS 👇
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

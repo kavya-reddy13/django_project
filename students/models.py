@@ -15,5 +15,5 @@ class Student(models.Model):
     email=models.EmailField()
     password=models.CharField(max_length=100)
 
-    def _str_(self):
+    def __str__(self):
         return self.first_name

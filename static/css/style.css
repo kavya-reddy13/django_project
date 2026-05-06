@@ -49,7 +49,7 @@ padding:40px;
 
 .hero{
 height:100vh;
-background:url('/static/images/collegeimage.jpg');
+
 background-size:cover;
 background-position:center;
 display:flex;
